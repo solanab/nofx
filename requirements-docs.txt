@@ -1,0 +1,18 @@
+# MkDocs Documentation Requirements
+# Install with: pip install -r requirements-docs.txt
+
+# Core MkDocs
+mkdocs>=1.6.0
+
+# Material Theme - most popular MkDocs theme
+mkdocs-material>=9.5.0
+
+# Plugins
+mkdocs-static-i18n>=1.2.0          # Multilingual support
+mkdocs-git-revision-date-localized-plugin>=1.2.0  # Git revision dates
+
+# Markdown extensions (some come with mkdocs-material)
+pymdown-extensions>=10.0
+
+# Development
+watchdog>=4.0.0  # For live reload

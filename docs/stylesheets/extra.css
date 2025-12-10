@@ -1,0 +1,188 @@
+/* NOFX Documentation - Custom Styles */
+
+/* Color variables */
+:root {
+  --nofx-primary: #7c3aed;
+  --nofx-accent: #fbbf24;
+  --nofx-success: #10b981;
+  --nofx-warning: #f59e0b;
+  --nofx-danger: #ef4444;
+}
+
+/* Logo and branding */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.8rem;
+}
+
+/* Custom admonition - Trading Warning */
+.md-typeset .admonition.trading-warning,
+.md-typeset details.trading-warning {
+  border-color: var(--nofx-warning);
+}
+
+.md-typeset .trading-warning > .admonition-title,
+.md-typeset .trading-warning > summary {
+  background-color: rgba(251, 191, 36, 0.1);
+}
+
+.md-typeset .trading-warning > .admonition-title::before,
+.md-typeset .trading-warning > summary::before {
+  background-color: var(--nofx-warning);
+  -webkit-mask-image: var(--md-admonition-icon--warning);
+  mask-image: var(--md-admonition-icon--warning);
+}
+
+/* Exchange badges */
+.exchange-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0.125rem;
+}
+
+.exchange-badge.cex {
+  background-color: rgba(124, 58, 237, 0.1);
+  color: var(--nofx-primary);
+  border: 1px solid var(--nofx-primary);
+}
+
+.exchange-badge.dex {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--nofx-success);
+  border: 1px solid var(--nofx-success);
+}
+
+/* AI Model badges */
+.ai-badge {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: rgba(251, 191, 36, 0.15);
+  color: #b45309;
+  border: 1px solid var(--nofx-accent);
+}
+
+[data-md-color-scheme="slate"] .ai-badge {
+  color: var(--nofx-accent);
+}
+
+/* Status indicators */
+.status-supported {
+  color: var(--nofx-success);
+}
+
+.status-coming-soon {
+  color: var(--nofx-warning);
+}
+
+.status-deprecated {
+  color: var(--nofx-danger);
+}
+
+/* Table improvements */
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: var(--md-default-fg-color--lighter);
+}
+
+/* Code block improvements */
+.md-typeset pre > code {
+  font-size: 0.85rem;
+}
+
+/* Navigation improvements for long nav trees */
+.md-nav__item--nested > .md-nav > .md-nav__list {
+  padding-left: 0.6rem;
+}
+
+/* Footer social icons */
+.md-social__link svg {
+  max-height: 1.2rem;
+}
+
+/* Keyboard shortcuts */
+.md-typeset kbd {
+  background-color: var(--md-default-fg-color--lightest);
+  border-color: var(--md-default-fg-color--lighter);
+  box-shadow: 0 0.1rem 0 0.05rem var(--md-default-fg-color--lighter);
+}
+
+/* Print styles */
+@media print {
+  .md-header,
+  .md-sidebar,
+  .md-footer {
+    display: none;
+  }
+
+  .md-content {
+    margin: 0;
+    padding: 1rem;
+  }
+}
+
+/* Mobile improvements */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__source {
+    padding: 0.6rem;
+  }
+}
+
+/* Language selector improvement */
+.md-select__inner {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Hero section for landing page */
+.hero {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Feature grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: var(--md-default-fg-color--lightest);
+  border: 1px solid var(--md-default-fg-color--lighter);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+}
+
+[data-md-color-scheme="slate"] .feature-card {
+  background-color: var(--md-code-bg-color);
+}

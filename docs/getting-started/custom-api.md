@@ -1,18 +1,18 @@
-# 自定义 AI API 使用指南
+# Custom AI API Usage Guide
 
-## 功能说明
+## Features
 
-现在 NOFX 支持使用任何 OpenAI 格式兼容的 API，包括：
-- OpenAI 官方 API (gpt-4o, gpt-4-turbo 等)
-- OpenRouter (可访问多种模型)
-- 本地部署的模型 (Ollama, LM Studio 等)
-- 其他兼容 OpenAI 格式的 API 服务
+NOFX now supports using any OpenAI-compatible API format, including:
+- OpenAI official API (gpt-4o, gpt-4-turbo, etc.)
+- OpenRouter (access to multiple models)
+- Locally deployed models (Ollama, LM Studio, etc.)
+- Other OpenAI-compatible API services
 
-## 配置方式
+## Configuration Method
 
-在 `config.json` 中添加使用自定义 API 的 trader（~~已弃用~~）：
+~~Add trader using custom API in `config.json` (deprecated):~~
 
-*注意：现在通过Web界面配置自定义API和交易员，config.json仅保留基础设置*
+*Note: Custom APIs and traders are now configured through the Web interface. config.json only retains basic settings.*
 
 ```json
 {
@@ -37,18 +37,18 @@
 }
 ```
 
-## 配置字段说明
+## Configuration Fields
 
-| 字段 | 类型 | 必需 | 说明 |
-|-----|------|------|------|
-| `ai_model` | string | ✅ | 设置为 `"custom"` 启用自定义 API |
-| `custom_api_url` | string | ✅ | API 的 Base URL (不含 `/chat/completions`)。特殊用法：如果以 `#` 结尾，则使用完整 URL（不自动添加路径） |
-| `custom_api_key` | string | ✅ | API 密钥 |
-| `custom_model_name` | string | ✅ | 模型名称 (如 `gpt-4o`, `claude-3-5-sonnet` 等) |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `ai_model` | string | ✅ | Set to `"custom"` to enable custom API |
+| `custom_api_url` | string | ✅ | API Base URL (without `/chat/completions`). Special usage: If ending with `#`, use full URL (no auto path append) |
+| `custom_api_key` | string | ✅ | API key |
+| `custom_model_name` | string | ✅ | Model name (e.g. `gpt-4o`, `claude-3-5-sonnet`, etc.) |
 
-## 使用示例
+## Usage Examples
 
-### 1. OpenAI 官方 API
+### 1. OpenAI Official API
 
 ```json
 {
@@ -70,7 +70,7 @@
 }
 ```
 
-### 3. 本地 Ollama
+### 3. Local Ollama
 
 ```json
 {
@@ -92,9 +92,9 @@
 }
 ```
 
-### 5. 使用完整自定义路径（末尾添加 #）
+### 5. Using Full Custom Path (append #)
 
-对于某些特殊的 API 端点，如果已经包含完整路径（包括 `/chat/completions` 或其他自定义路径），可以在 URL 末尾添加 `#` 来强制使用完整 URL：
+For certain special API endpoints that already include the full path (including `/chat/completions` or other custom paths), you can append `#` at the end of the URL to force using the full URL:
 
 ```json
 {
@@ -105,34 +105,34 @@
 }
 ```
 
-**注意**：`#` 会被自动去除，实际请求会发送到 `https://api.example.com/v2/ai/chat/completions`
+**Note**: The `#` will be automatically removed, and the actual request will be sent to `https://api.example.com/v2/ai/chat/completions`
 
-## 兼容性要求
+## Compatibility Requirements
 
-自定义 API 必须：
-1. 支持 OpenAI Chat Completions 格式
-2. 接受 `POST` 请求到 `/chat/completions` 端点（或在 URL 末尾添加 `#` 以使用自定义路径）
-3. 支持 `Authorization: Bearer {api_key}` 认证
-4. 返回标准的 OpenAI 响应格式
+Custom APIs must:
+1. Support OpenAI Chat Completions format
+2. Accept `POST` requests to `/chat/completions` endpoint (or append `#` at URL end for custom path)
+3. Support `Authorization: Bearer {api_key}` authentication
+4. Return standard OpenAI response format
 
-## 注意事项
+## Important Notes
 
-1. **URL 格式**：`custom_api_url` 应该是 Base URL，系统会自动添加 `/chat/completions`
-   - ✅ 正确：`https://api.openai.com/v1`
-   - ❌ 错误：`https://api.openai.com/v1/chat/completions`
-   - 🔧 **特殊用法**：如果需要使用完整的自定义路径（不自动添加 `/chat/completions`），可以在 URL 末尾添加 `#`
-     - 例如：`https://api.example.com/custom/path/chat/completions#`
-     - 系统会自动去掉 `#` 并直接使用该完整 URL
+1. **URL Format**: `custom_api_url` should be the Base URL, system will auto-append `/chat/completions`
+   - ✅ Correct: `https://api.openai.com/v1`
+   - ❌ Wrong: `https://api.openai.com/v1/chat/completions`
+   - 🔧 **Special usage**: If you need to use a full custom path (without auto-appending `/chat/completions`), append `#` at the URL end
+     - Example: `https://api.example.com/custom/path/chat/completions#`
+     - System will automatically remove `#` and use the full URL directly
 
-2. **模型名称**：确保 `custom_model_name` 与 API 提供商支持的模型名称完全一致
+2. **Model Name**: Ensure `custom_model_name` exactly matches the model name supported by your API provider
 
-3. **API 密钥**：某些本地部署的模型可能不需要真实的 API 密钥，可以填写任意字符串
+3. **API Key**: Some locally deployed models may not require a real API key, you can fill in any string
 
-4. **超时设置**：默认超时时间为 120 秒，如果模型响应较慢可能需要调整
+4. **Timeout Settings**: Default timeout is 120 seconds, may need adjustment if model response is slow
 
-## 多 AI 对比交易
+## Multi-AI Comparison Trading
 
-你可以同时配置多个不同 AI 的 trader 进行对比：
+You can configure multiple traders with different AIs for comparison:
 
 ```json
 {
@@ -163,32 +163,32 @@
 }
 ```
 
-## 故障排除
+## Troubleshooting
 
-### 问题：配置验证失败
+### Issue: Configuration Validation Failed
 
-**错误信息**：`使用自定义API时必须配置custom_api_url`
+**Error Message**: `使用自定义API时必须配置custom_api_url` (custom_api_url must be configured when using custom API)
 
-**解决方案**：确保设置了 `ai_model: "custom"` 后，同时配置了：
+**Solution**: After setting `ai_model: "custom"`, ensure you also configure:
 - `custom_api_url`
 - `custom_api_key`
 - `custom_model_name`
 
-### 问题：API 调用失败
+### Issue: API Call Failed
 
-**可能原因**：
-1. URL 格式错误
-   - 普通用法：不应包含 `/chat/completions`（系统会自动添加）
-   - 特殊用法：如果需要完整路径，记得在 URL 末尾添加 `#`
-2. API 密钥无效
-3. 模型名称错误
-4. 网络连接问题
+**Possible Causes**:
+1. URL format error
+   - Normal usage: Should not include `/chat/completions` (system will auto-append)
+   - Special usage: If full path is needed, remember to append `#` at URL end
+2. Invalid API key
+3. Incorrect model name
+4. Network connection issues
 
-**调试方法**：查看日志中的错误信息，通常会包含 HTTP 状态码和错误详情
+**Debug Method**: Check error messages in logs, usually includes HTTP status code and error details
 
-## 向后兼容性
+## Backward Compatibility
 
-现有的 `deepseek` 和 `qwen` 配置完全不受影响，可以继续使用：
+Existing `deepseek` and `qwen` configurations are unaffected and can continue to be used:
 
 ```json
 {
@@ -197,7 +197,7 @@
 }
 ```
 
-或
+Or
 
 ```json
 {

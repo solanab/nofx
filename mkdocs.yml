@@ -1,0 +1,297 @@
+# NOFX Documentation - MkDocs Configuration
+# https://www.mkdocs.org/
+
+site_name: NOFX Documentation
+site_description: AI-Powered Crypto Trading Platform - Documentation
+site_author: Tinkle Community
+site_url: https://docs.nofx.dev
+
+# Repository
+repo_name: tinkle-community/nofx
+repo_url: https://github.com/tinkle-community/nofx
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024-2025 Tinkle Community
+
+# Theme configuration
+theme:
+  name: material
+  language: en
+  custom_dir: docs/overrides
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+    - content.action.view
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/robot-happy-outline
+  favicon: assets/favicon.ico
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+      lang:
+        - en
+        - zh
+        - ja
+        - ko
+        - ru
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: zh
+          name: 中文 (简体)
+          build: true
+          site_name: NOFX 文档
+          nav_translations:
+            Home: 首页
+            Getting Started: 快速开始
+            Docker Deployment: Docker 部署
+            Custom AI API: 自定义 AI API
+            Exchange Setup: 交易所设置
+            User Guides: 使用指南
+            FAQ: 常见问题
+            Troubleshooting: 故障排查
+            Architecture: 系统架构
+            Community: 社区
+            Bounty Program: 悬赏计划
+            Contributing: 贡献指南
+            Roadmap: 路线图
+            API Reference: API 参考
+            Maintainers: 维护者
+            Legal: 法律条款
+        - locale: ja
+          name: 日本語
+          build: true
+          nav_translations:
+            Home: ホーム
+            Getting Started: はじめに
+            Docker Deployment: Docker デプロイ
+            User Guides: ユーザーガイド
+            FAQ: よくある質問
+            Architecture: アーキテクチャ
+            Community: コミュニティ
+            Roadmap: ロードマップ
+        - locale: ko
+          name: 한국어
+          build: true
+          nav_translations:
+            Home: 홈
+            Getting Started: 시작하기
+            User Guides: 사용자 가이드
+            Community: 커뮤니티
+            Roadmap: 로드맵
+        - locale: ru
+          name: Русский
+          build: true
+          nav_translations:
+            Home: Главная
+            Getting Started: Начало работы
+            User Guides: Руководства
+            Community: Сообщество
+            Roadmap: Дорожная карта
+        - locale: uk
+          name: Українська
+          build: true
+          nav_translations:
+            Home: Головна
+            Getting Started: Початок роботи
+            User Guides: Посібники
+            Community: Спільнота
+            Roadmap: Дорожня карта
+        - locale: vi
+          name: Tiếng Việt
+          build: true
+          nav_translations:
+            Home: Trang chủ
+            Getting Started: Bắt đầu
+            User Guides: Hướng dẫn
+            Community: Cộng đồng
+            Roadmap: Lộ trình
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+
+# Markdown extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: tinkle-community
+      repo: nofx
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Navigation structure
+nav:
+  - Home: index.md
+  - Getting Started:
+      - getting-started/index.md
+      - Docker Deployment: getting-started/docker-deploy.md
+      - Custom AI API: getting-started/custom-api.md
+      - Exchange Setup:
+          - Binance: getting-started/binance-api.md
+          - Bybit: getting-started/bybit-api.md
+          - OKX: getting-started/okx-api.md
+          - Hyperliquid: getting-started/hyperliquid-agent-wallet.md
+          - Aster DEX: getting-started/aster-api-wallet.md
+          - Lighter: getting-started/lighter-agent-wallet.md
+  - User Guides:
+      - guides/index.md
+      - FAQ: guides/faq.md
+      - Troubleshooting: guides/troubleshooting.md
+      - Prompt Guide: guides/prompt-guide.md
+      - PnL Calculation: guides/pnl.md
+  - Architecture:
+      - architecture/index.md
+  - API Reference:
+      - api/index.md
+      - Coin API: api/coin_api.md
+      - Open Interest API: api/oi_api.md
+  - Community:
+      - community/index.md
+      - Bounty Program:
+          - community/bounty-guide.md
+          - Hyperliquid Bounty: community/bounty-hyperliquid.md
+          - Aster Bounty: community/bounty-aster.md
+      - Migration:
+          - community/migration-announcement.md
+          - How to Migrate PR: community/how-to-migrate-pr.md
+  - Roadmap: roadmap/index.md
+  - Maintainers:
+      - maintainers/index.md
+      - Setup Guide: maintainers/setup-guide.md
+      - PR Review Guide: maintainers/pr-review-guide.md
+      - Project Management: maintainers/project-management.md
+
+# Extra configuration
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tinkle-community/nofx
+      name: GitHub
+    - icon: fontawesome/brands/twitter
+      link: https://x.com/nofx_official
+      name: Twitter
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/nofx_dev_community
+      name: Telegram
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: 中文 (简体)
+      link: /zh/
+      lang: zh
+    - name: 日本語
+      link: /ja/
+      lang: ja
+    - name: 한국어
+      link: /ko/
+      lang: ko
+    - name: Русский
+      link: /ru/
+      lang: ru
+    - name: Українська
+      link: /uk/
+      lang: uk
+    - name: Tiếng Việt
+      link: /vi/
+      lang: vi
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js

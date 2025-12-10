@@ -1,6 +1,6 @@
 # NOFX Makefile for testing and development
 
-.PHONY: help test test-backend test-frontend test-coverage clean
+.PHONY: help test test-backend test-frontend test-coverage clean docs docs-serve docs-build docs-deps
 
 # Default target
 help:
@@ -15,6 +15,12 @@ help:
 	@echo "Build:"
 	@echo "  make build                - Build backend binary"
 	@echo "  make build-frontend       - Build frontend"
+	@echo ""
+	@echo "Documentation:"
+	@echo "  make docs                 - Build and serve documentation locally"
+	@echo "  make docs-serve           - Serve documentation with live reload"
+	@echo "  make docs-build           - Build documentation for production"
+	@echo "  make docs-deps            - Install documentation dependencies"
 	@echo ""
 	@echo "Clean:"
 	@echo "  make clean                - Clean build artifacts and test cache"
@@ -100,6 +106,7 @@ clean:
 	rm -f nofx
 	rm -f coverage.out coverage.html
 	rm -rf web/dist
+	rm -rf site
 	go clean -testcache
 	@echo "✅ Cleaned"
 
@@ -151,3 +158,35 @@ deps-frontend:
 	@echo "📦 Installing frontend dependencies..."
 	cd web && npm install
 	@echo "✅ Frontend dependencies installed"
+
+# =============================================================================
+# Documentation
+# =============================================================================
+
+# Install documentation dependencies
+docs-deps:
+	@echo "📦 Installing documentation dependencies..."
+	pip install -r requirements-docs.txt
+	@echo "✅ Documentation dependencies installed"
+
+# Build and serve documentation locally
+docs: docs-deps
+	@echo "📚 Building and serving documentation..."
+	mkdocs serve
+
+# Serve documentation with live reload (without installing deps)
+docs-serve:
+	@echo "📚 Serving documentation with live reload..."
+	mkdocs serve --dev-addr=0.0.0.0:8000
+
+# Build documentation for production
+docs-build:
+	@echo "📚 Building documentation for production..."
+	mkdocs build --strict
+	@echo "✅ Documentation built: ./site"
+
+# Clean documentation build
+docs-clean:
+	@echo "🧹 Cleaning documentation build..."
+	rm -rf site
+	@echo "✅ Documentation build cleaned"
