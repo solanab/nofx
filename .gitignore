@@ -30,6 +30,7 @@ Thumbs.db
 # 环境变量
 .env
 config.json
+data.db*
 configbak.json
 
 # 数据目录（数据库、日志等）
@@ -38,6 +39,7 @@ data/
 
 # 决策日志
 decision_logs/
+coin_pool_cache/
 nofx_test
 
 # Node.js
@@ -124,3 +126,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 PR_DESCRIPTION.md
+
+# MkDocs documentation build
+site/
