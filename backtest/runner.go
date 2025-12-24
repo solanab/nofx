@@ -607,6 +607,11 @@ func (r *Runner) executeDecision(dec decision.Decision, priceMap map[string]floa
 		Timestamp: time.UnixMilli(ts).UTC(),
 	}
 
+	// Early return for hold/wait actions - no price needed
+	if dec.Action == "hold" || dec.Action == "wait" {
+		return actionRecord, nil, fmt.Sprintf("hold position: %s", dec.Action), nil
+	}
+
 	basePrice := priceMap[symbol]
 	if basePrice <= 0 {
 		return actionRecord, nil, "", fmt.Errorf("price unavailable for %s", symbol)
@@ -732,8 +737,6 @@ func (r *Runner) executeDecision(dec decision.Decision, priceMap map[string]floa
 		}
 		return actionRecord, []TradeEvent{trade}, "", nil
 
-	case "hold", "wait":
-		return actionRecord, nil, fmt.Sprintf("hold position: %s", dec.Action), nil
 	default:
 		return actionRecord, nil, "", fmt.Errorf("unsupported action %s", dec.Action)
 	}
